@@ -7,15 +7,21 @@ import { getTopScorers } from "./context/apiActions";
 import { useApi } from "./context/apiContext";
 import { createStyles } from "./types/emotion-styles";
 
+
 interface Props {}
 
 const FutbolApp = (props: Props) => {
   const { state, dispatch } = useApi();
   useEffect(() => {
     getTopScorers(dispatch);
-    return () => {};
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(()=>{
+    
+  },[])
+
+  
 
   return (
     <div
@@ -23,14 +29,17 @@ const FutbolApp = (props: Props) => {
         display: "flex",
         flex: 1,
         justifyContent: "flex-start",
+        minHeight: "100vh"
       }}
     >
       <FilterBar />
       <div style={{ display: "flex", flexDirection: "column", flexGrow: 2 }}>
         <h1 style={{ marginLeft: 20 }}>Goleadores</h1>
         <div css={styles.cardsContainer}>
-          {state.topScorers &&
-            state.topScorers.map((b: string) => <PlayerCard id={b} key={b} />)}
+          {state.players &&
+            Object.keys(state.players).map((p: string) => (
+              <PlayerCard id={p} key={p} />
+            ))}
         </div>
       </div>
     </div>

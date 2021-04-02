@@ -20,36 +20,30 @@ const PlayerCard = ({ id }: Props) => {
   const { state } = useApi();
   const selectedPlayer = state.players[id];
 
-  if (selectedPlayer) {
+  
     return (
       <Card style={styles.cardContainer}>
         <div style={{ position: "relative", marginTop: spacing.medium }}>
-          {!!selectedPlayer.player.data.team && (
-            <img
-              src={selectedPlayer.player.data.team.data.logo_path}
-              alt={selectedPlayer.team_id.toString()}
-              width={40}
-              height={40}
-              style={styles.teamLogo}
-            />
-          )}
+          <img
+            src={selectedPlayer.teamLogo}
+            alt={selectedPlayer.teamId.toString()}
+            width={40}
+            height={40}
+            style={styles.teamLogo}
+          />
+
           <div css={styles.imgContainer}>
             <img
-              src={selectedPlayer.player.data.image_path}
-              alt={selectedPlayer.player_id.toString()}
+              src={selectedPlayer.img}
+              alt={selectedPlayer.id.toString()}
               height={100}
               width={100}
             />
           </div>
         </div>
         <div style={styles.infoContainer}>
-          <p style={styles.playerTitle}>
-            {selectedPlayer.player.data.fullname}
-          </p>
-          <span style={styles.teamTitle}>
-            {!!selectedPlayer.player.data.team &&
-              selectedPlayer.player.data.team.data.name}
-          </span>
+          <p style={styles.playerTitle}>{selectedPlayer.name}</p>
+          <span style={styles.teamTitle}>{selectedPlayer.teamName}</span>
           <p>Goles {selectedPlayer.goals}</p>
         </div>
         <div
@@ -60,26 +54,20 @@ const PlayerCard = ({ id }: Props) => {
           }}
         >
           <div style={styles.centeredRow}>
-            {!!selectedPlayer.player.data.height && (
-              <>
-                <GiBodyHeight />
-                <span>{selectedPlayer.player.data.height}</span>
-              </>
-            )}
+            <>
+              <GiBodyHeight />
+              <span>{selectedPlayer.height} cm</span>
+            </>
           </div>
           <div style={styles.centeredRow}>
-            {selectedPlayer.player.data.weight && (
-              <>
-                <GiWeight />
-                <span>{selectedPlayer.player.data.weight}</span>
-              </>
-            )}
+            <>
+              <GiWeight />
+              <span>{selectedPlayer.weight} kg</span>
+            </>
           </div>
         </div>
       </Card>
     );
-  }
-  return <div style={{ backgroundColor: "red" }} />;
 };
 
 export default PlayerCard;

@@ -41,7 +41,7 @@ export interface PlayerDetail {
   data: Data;
 }
 
-export interface Player {
+export interface PlayerAPI {
   position: number;
   season_id: number;
   player_id: number;
@@ -51,4 +51,19 @@ export interface Player {
   penalty_goals: number;
   type: string;
   player: PlayerDetail;
+}
+
+export interface Player {
+  id: string;
+  name: string;
+  goals: number;
+  weight: number | null;
+  weightUnit: string;
+  height: number | null;
+  heightUnit: number;
+  teamId: string;
+  teamName: string;
+  img: string;
+  teamLogo: string;
+  nationality: string;
 }
