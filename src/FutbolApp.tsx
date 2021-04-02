@@ -1,36 +1,49 @@
 /** @jsxImportSource @emotion/react */
 import React, { useEffect } from "react";
+import FilterBar from "./components/FilterBar";
+
 import PlayerCard from "./components/PlayerCard";
+import { getTopScorers } from "./context/apiActions";
 import { useApi } from "./context/apiContext";
+import { createStyles } from "./types/emotion-styles";
 
 interface Props {}
 
 const FutbolApp = (props: Props) => {
   const { state, dispatch } = useApi();
-  // useEffect(() => {
-  //   getPlayer(dispatch);
-  //   return () => {};
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
+  useEffect(() => {
+    getTopScorers(dispatch);
+    return () => {};
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
-    <div>
-      <h1>Encuentra tu cerveza</h1>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "auto auto auto auto",
-          gridRowGap: 20,
-          marginLeft: 20,
-        }}
-      >
-        {state.beerList &&
-          Object.keys(state.beerList).map((b: string) => (
-            <PlayerCard id={b} key={b} />
-          ))}
+    <div
+      style={{
+        display: "flex",
+        flex: 1,
+        justifyContent: "flex-start",
+      }}
+    >
+      <FilterBar />
+      <div style={{ display: "flex", flexDirection: "column", flexGrow: 2 }}>
+        <h1 style={{ marginLeft: 20 }}>Goleadores</h1>
+        <div css={styles.cardsContainer}>
+          {state.topScorers &&
+            state.topScorers.map((b: string) => <PlayerCard id={b} key={b} />)}
+        </div>
       </div>
     </div>
   );
 };
 
 export default FutbolApp;
+
+const styles = createStyles({
+  cardsContainer: {
+    display: "grid",
+    gridTemplateColumns: "auto auto auto auto",
+    gridRowGap: 20,
+    marginLeft: 20,
+  },
+});

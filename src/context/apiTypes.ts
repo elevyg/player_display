@@ -1,16 +1,18 @@
 import { Player } from "../types/Player";
 
-export const SET_PLAYERS = "GET_PLAYERS";
+export const SET_TOP_SCORERS = "SET_TOP_SCORERS";
 
 export type Dispatch = (action: Action) => void;
 
 export interface State {
-  beerList: Record<string, Player>;
+  players: Record<string, Player>;
+  topScorers: string[];
 }
 
-interface GetPlayers {
-  type: typeof SET_PLAYERS;
-  payload: Record<string, Player>;
+interface SetTopScorers {
+  type: typeof SET_TOP_SCORERS;
+  players: Record<string, Player>;
+  topScorers;
 }
 
-export type Action = GetPlayers;
+export type Action = SetTopScorers;

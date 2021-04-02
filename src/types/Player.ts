@@ -1,4 +1,23 @@
-export interface Player {
+export interface Data2 {
+  id: number;
+  legacy_id: number;
+  name: string;
+  short_code: string;
+  twitter?: string;
+  country_id: number;
+  national_team: boolean;
+  founded: number;
+  logo_path: string;
+  venue_id: number;
+  current_season_id: number;
+  is_placeholder: boolean;
+}
+
+export interface Team {
+  data: Data2;
+}
+
+export interface Data {
   player_id: number;
   team_id: number;
   country_id: number;
@@ -11,29 +30,25 @@ export interface Player {
   nationality: string;
   birthdate: string;
   birthcountry: string;
-  birthplace: string;
+  birthplace?: string;
   height: string;
-  weight?: string;
+  weight: string;
   image_path: string;
+  team: Team;
 }
 
-export interface Plan {
-  name: string;
-  request_limit: string;
+export interface PlayerDetail {
+  data: Data;
 }
 
-export interface Sport {
-  id: number;
-  name: string;
-  current: boolean;
-}
-
-export interface Meta {
-  plans: Plan[];
-  sports: Sport[];
-}
-
-export interface RootObject {
-  data: Player;
-  meta: Meta;
+export interface Player {
+  position: number;
+  season_id: number;
+  player_id: number;
+  team_id: number;
+  stage_id?: string;
+  goals: number;
+  penalty_goals: number;
+  type: string;
+  player: PlayerDetail;
 }
