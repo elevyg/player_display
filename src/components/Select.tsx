@@ -2,7 +2,7 @@ import React, { useMemo, useState } from "react";
 import { Select as MUISelect, withStyles } from "@material-ui/core";
 import { theme } from "../utils/theme";
 import { useApi } from "../context/apiContext";
-import { SET_FILTER } from "../context/apiTypes";
+import { SET_FILTER, UPDATE_DISPLAYED_PLAYERS } from "../context/apiTypes";
 import { uniqueList } from "../utils/uniqueList";
 import { Player } from "../types/Player";
 
@@ -43,6 +43,7 @@ const Select = ({ filter }: Props) => {
       value: e.target.value,
       key: filter,
     });
+    dispatch({ type: UPDATE_DISPLAYED_PLAYERS });
   };
 
   return (

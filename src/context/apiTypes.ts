@@ -2,6 +2,7 @@ import { Player } from "../types/Player";
 import { Season } from "../types/Seasons";
 
 export const SET_TOP_SCORERS = "SET_TOP_SCORERS";
+export const UPDATE_DISPLAYED_PLAYERS = "UPDATE_DISPLAYED_PLAYERS";
 export const SET_SEASONS = "SET_SEASONS";
 export const SET_SEASON = "SET_SEASON";
 export const SET_FILTER = "SET_FILTER";
@@ -13,6 +14,7 @@ export type Dispatch = (action: Action) => void;
 export interface State {
   loading: boolean;
   players: Record<string, Player>;
+  displayedPlayers: string[];
   seasons: Season[];
   selectedSeason: Season | null;
   weightFilter: number[] | null;
@@ -47,9 +49,14 @@ interface SetLoading {
   loading: boolean;
 }
 
+interface UpdateDisplayedPlayers {
+  type: typeof UPDATE_DISPLAYED_PLAYERS;
+}
+
 export type Action =
   | SetTopScorers
   | SetFilter
   | SetSeasons
   | SetSeason
-  | SetLoading;
+  | SetLoading
+  | UpdateDisplayedPlayers;
