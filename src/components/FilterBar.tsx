@@ -1,33 +1,13 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
-/* eslint-disable arrow-body-style */
-import React, { useState } from "react";
-import Slider from "@material-ui/core/Slider";
-import { withStyles } from "@material-ui/core";
-
+import React from "react";
+import { useApi } from "../context/apiContext";
 import { theme } from "../utils/theme";
 import { spacing } from "../utils/units";
-import { useApi } from "../context/apiContext";
-import { SLIDER_FILTER } from "../context/apiTypes";
+import Slider from "./Slider";
 
 interface Props {}
 
-const CustomSlider = withStyles({
-  root: {
-    color: theme.color.red,
-    height: 3,
-    padding: "13px 0",
-  },
-})(Slider);
-
 const FilterBar = (props: Props) => {
-  const [filterValue, setFilterValue] = useState<number | number[]>([60, 80]);
-  
-  const { dispatch } = useApi();
-
-  const onChangeHandle = (e, value: number[]) => {
-    setFilterValue(value);
-    
-  };
+  const { state } = useApi();
   return (
     <div
       style={{
@@ -42,12 +22,11 @@ const FilterBar = (props: Props) => {
       }}
     >
       <h2>Peso</h2>
-      <CustomSlider
-        style={{ width: "80%" }}
-        value={filterValue}
-        onChange={onChangeHandle}
-        min={68}
-      />
+      <Slider filter="weight" min={60} max={80} />
+      <h2>Altura</h2>
+      <Slider filter="height" min={100} max={200} />
+      <h2>Goles</h2>
+      <Slider filter="goals" min={0} max={20} />
     </div>
   );
 };

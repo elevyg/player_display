@@ -4,7 +4,9 @@
 /** @jsxImportSource @emotion/react */
 import React from "react";
 import { GiWeight, GiBodyHeight } from "react-icons/gi";
+import { flag } from "country-emoji";
 import { useApi } from "../context/apiContext";
+
 import { createStyles } from "../types/emotion-styles";
 import { theme } from "../utils/theme";
 import { fontSizes, spacing } from "../utils/units";
@@ -20,54 +22,58 @@ const PlayerCard = ({ id }: Props) => {
   const { state } = useApi();
   const selectedPlayer = state.players[id];
 
-  
-    return (
-      <Card style={styles.cardContainer}>
-        <div style={{ position: "relative", marginTop: spacing.medium }}>
-          <img
-            src={selectedPlayer.teamLogo}
-            alt={selectedPlayer.teamId.toString()}
-            width={40}
-            height={40}
-            style={styles.teamLogo}
-          />
+  return (
+    <Card style={styles.cardContainer}>
+      <div style={{ position: "relative", marginTop: spacing.medium }}>
+        <img
+          src={selectedPlayer.teamLogo}
+          alt={selectedPlayer.teamId.toString()}
+          width={40}
+          height={40}
+          style={styles.teamLogo}
+        />
 
-          <div css={styles.imgContainer}>
-            <img
-              src={selectedPlayer.img}
-              alt={selectedPlayer.id.toString()}
-              height={100}
-              width={100}
-            />
-          </div>
+        <div css={styles.imgContainer}>
+          <img
+            src={selectedPlayer.img}
+            alt={selectedPlayer.id.toString()}
+            height={100}
+            width={100}
+          />
         </div>
-        <div style={styles.infoContainer}>
-          <p style={styles.playerTitle}>{selectedPlayer.name}</p>
-          <span style={styles.teamTitle}>{selectedPlayer.teamName}</span>
-          <p>Goles {selectedPlayer.goals}</p>
+      </div>
+      <div style={styles.infoContainer}>
+        <span style={styles.playerTitle}>{selectedPlayer.name}</span>
+        <span style={{ fontSize: 30 }}>{flag(selectedPlayer.nationality)}</span>
+        <span style={styles.teamTitle}>{selectedPlayer.teamName}</span>
+        <p>Goles {selectedPlayer.goals}</p>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-around",
+          width: "100%",
+        }}
+      >
+        <div style={styles.centeredRow}>
+          <>
+            <GiBodyHeight />
+            <span>
+              {selectedPlayer.height} {selectedPlayer.heightUnit}
+            </span>
+          </>
         </div>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-around",
-            width: "100%",
-          }}
-        >
-          <div style={styles.centeredRow}>
-            <>
-              <GiBodyHeight />
-              <span>{selectedPlayer.height} cm</span>
-            </>
-          </div>
-          <div style={styles.centeredRow}>
-            <>
-              <GiWeight />
-              <span>{selectedPlayer.weight} kg</span>
-            </>
-          </div>
+        <div style={styles.centeredRow}>
+          <>
+            <GiWeight />
+            <span>
+              {selectedPlayer.weight} {selectedPlayer.weightUnit}
+            </span>
+          </>
         </div>
-      </Card>
-    );
+      </div>
+    </Card>
+  );
 };
 
 export default PlayerCard;
@@ -106,6 +112,8 @@ const styles = createStyles({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    justifyContent: "space-between",
+    marginTop: spacing.small,
   },
   centeredRow: {
     display: "flex",
