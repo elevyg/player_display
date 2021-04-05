@@ -1,8 +1,7 @@
 import React from "react";
-import { Select as MUISelect, withStyles } from "@material-ui/core";
+import { Select as MUISelect } from "@material-ui/core";
 import { useApi } from "../context/apiContext";
 import { SET_SEASON } from "../context/apiTypes";
-import { getTopScorers } from "../context/apiActions";
 
 interface Props {}
 

@@ -2,7 +2,7 @@
 /* eslint-disable no-unreachable */
 import { Player, PlayerAPI } from "../types/Player";
 import { API } from "../utils/api";
-import { useApi } from "./apiContext";
+
 import {
   Dispatch,
   SET_LOADING,

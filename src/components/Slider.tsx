@@ -36,14 +36,7 @@ const Slider = ({ filter, min, max }: Props) => {
   };
 
   return (
-    <div
-      style={{
-        width: "100%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <div style={styles.container}>
       <CustomSlider
         style={{ width: "80%" }}
         value={filterValue}
@@ -59,3 +52,12 @@ const Slider = ({ filter, min, max }: Props) => {
 };
 
 export default Slider;
+
+const styles: Record<string, React.CSSProperties> = {
+  container: {
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+};

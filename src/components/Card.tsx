@@ -1,19 +1,20 @@
 /** @jsxImportSource @emotion/react */
 
-import React from "react"
-import { createStyles } from "../types/emotion-styles"
+import React from "react";
+import { createStyles } from "../types/emotion-styles";
 
 interface Props {
-  style?: React.CSSProperties
+  style?: React.CSSProperties;
+  className?: string;
 }
 
 const Card: React.FC<Props> = (props) => (
-    <div {...props} css={{ ...styles.card, ...props.style }}>
-      {props.children}
-    </div>
-  )
+  <div {...props} css={{ ...styles.card, ...props.style }}>
+    {props.children}
+  </div>
+);
 
-export default Card
+export default Card;
 
 const styles = createStyles({
   card: {
@@ -24,6 +25,6 @@ const styles = createStyles({
     borderWidth: 1,
     borderColor: "#E0E0E0",
     backgroundColor: "white",
-    overflow: 'hidden'
+    overflow: "hidden",
   },
-})
+});

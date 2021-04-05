@@ -8,12 +8,14 @@ export const SET_SEASON = "SET_SEASON";
 export const SET_FILTER = "SET_FILTER";
 export const CLEAR_FILTERS = "CLEAR_FILTERS";
 export const SET_LOADING = "SET_LOADING";
+export const SET_SEARCH_TEXT = "SET_SEARCH_TEXT";
 
 export type Dispatch = (action: Action) => void;
 
 export interface State {
   loading: boolean;
   players: Record<string, Player>;
+  searchText: string | null;
   displayedPlayers: string[];
   seasons: Season[];
   selectedSeason: Season | null;
@@ -33,7 +35,6 @@ interface SetSeasons {
   type: typeof SET_SEASONS;
   seasons: Season[];
 }
-
 interface SetSeason {
   type: typeof SET_SEASON;
   season: Season;
@@ -52,6 +53,14 @@ interface SetLoading {
 interface UpdateDisplayedPlayers {
   type: typeof UPDATE_DISPLAYED_PLAYERS;
 }
+interface ClearFilters {
+  type: typeof CLEAR_FILTERS;
+}
+
+interface SetSearchText {
+  type: typeof SET_SEARCH_TEXT;
+  searchText: string;
+}
 
 export type Action =
   | SetTopScorers
@@ -59,4 +68,6 @@ export type Action =
   | SetSeasons
   | SetSeason
   | SetLoading
-  | UpdateDisplayedPlayers;
+  | UpdateDisplayedPlayers
+  | SetSearchText
+  | ClearFilters;

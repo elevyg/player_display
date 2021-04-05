@@ -4,6 +4,7 @@ import {
   CLEAR_FILTERS,
   SET_FILTER,
   SET_LOADING,
+  SET_SEARCH_TEXT,
   SET_SEASON,
   SET_SEASONS,
   SET_TOP_SCORERS,
@@ -16,7 +17,8 @@ export const initialState: State = {
   players: {},
   displayedPlayers: [],
   seasons: [],
-  selectedSeason: { id: "759", name: "2016/2017" },
+  searchText: null,
+  selectedSeason: { id: "17328", name: "2020/2021" },
   weightFilter: null,
   goalsFilter: null,
   heightFilter: null,
@@ -30,7 +32,9 @@ const apiReducer = (state: State, action: Action): State => {
       return {
         ...state,
         players: action.players,
-        displayedPlayers: Object.keys(action.players),
+        displayedPlayers: Object.values(action.players)
+          .sort((a, b) => b.goals - a.goals)
+          .map((p) => p.id),
         loading: false,
         weightFilter: null,
         goalsFilter: null,
@@ -68,12 +72,31 @@ const apiReducer = (state: State, action: Action): State => {
             ? p
             : p.teamName === state.teamNameFilter
         )
+        .filter((p) => {
+          if (state.searchText === null) {
+            return p;
+          }
+          return p.name.toLowerCase().includes(state.searchText);
+        })
         .sort((a, b) => b.goals - a.goals)
         .map((pp) => pp.id);
       return { ...state, displayedPlayers };
     }
+    case SET_SEARCH_TEXT:
+      return { ...state, searchText: action.searchText.toLowerCase() };
     case SET_LOADING:
       return { ...state, loading: action.loading };
+    case CLEAR_FILTERS:
+      return {
+        ...state,
+        searchText: null,
+        selectedSeason: { id: "17328", name: "2020/2021" },
+        weightFilter: null,
+        goalsFilter: null,
+        heightFilter: null,
+        nationalityFilter: null,
+        teamNameFilter: null,
+      };
     default: {
       return state;
     }

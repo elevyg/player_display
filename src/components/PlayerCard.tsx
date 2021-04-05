@@ -12,6 +12,7 @@ import { theme } from "../utils/theme";
 import { fontSizes, spacing } from "../utils/units";
 
 import Card from "./Card";
+import { mq } from "../utils/mq";
 
 interface Props {
   id: string;
@@ -23,7 +24,7 @@ const PlayerCard = ({ id }: Props) => {
   const selectedPlayer = state.players[id];
 
   return (
-    <Card style={styles.cardContainer}>
+    <Card css={styles.cardContainer}>
       <div style={{ position: "relative", marginTop: spacing.medium }}>
         {selectedPlayer.teamLogo !== null && (
           <img
@@ -85,8 +86,11 @@ const styles = createStyles({
     flex: 1,
     flexDirection: "column",
     alignItems: "center",
-
     height: "100%",
+    marginBottom: 20,
+    [mq("md")]: {
+      marginBottom: 0,
+    },
   },
   teamLogo: {
     position: "absolute",
