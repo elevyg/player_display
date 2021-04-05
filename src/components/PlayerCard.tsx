@@ -25,14 +25,15 @@ const PlayerCard = ({ id }: Props) => {
   return (
     <Card style={styles.cardContainer}>
       <div style={{ position: "relative", marginTop: spacing.medium }}>
-        <img
-          src={selectedPlayer.teamLogo}
-          alt={selectedPlayer.teamId.toString()}
-          width={40}
-          height={40}
-          style={styles.teamLogo}
-        />
-
+        {selectedPlayer.teamLogo !== null && (
+          <img
+            src={selectedPlayer.teamLogo}
+            alt={selectedPlayer.teamId.toString()}
+            width={40}
+            height={40}
+            style={styles.teamLogo}
+          />
+        )}
         <div css={styles.imgContainer}>
           <img
             src={selectedPlayer.img}

@@ -1,13 +1,17 @@
 import React from "react";
+
 import { useApi } from "../context/apiContext";
 import { theme } from "../utils/theme";
 import { spacing } from "../utils/units";
+import SeasonSelect from "./SeasonSelect";
+import Select from "./Select";
 import Slider from "./Slider";
 
 interface Props {}
 
 const FilterBar = (props: Props) => {
   const { state } = useApi();
+
   return (
     <div
       style={{
@@ -21,12 +25,18 @@ const FilterBar = (props: Props) => {
         paddingTop: spacing.xxlarge,
       }}
     >
+      <h1>Temporada</h1>
+      <SeasonSelect />
       <h2>Peso</h2>
       <Slider filter="weight" min={60} max={80} />
       <h2>Altura</h2>
       <Slider filter="height" min={100} max={200} />
       <h2>Goles</h2>
       <Slider filter="goals" min={0} max={20} />
+      <h2>Nacionalidad</h2>
+      <Select filter="nationality" />
+      <h2>Equipo</h2>
+      <Select filter="teamName" />
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { Slider as MUISlider, withStyles } from "@material-ui/core";
 
-import { SLIDER_FILTER } from "../context/apiTypes";
+import { SET_FILTER } from "../context/apiTypes";
 import { useApi } from "../context/apiContext";
 import { Player } from "../types/Player";
 import { theme } from "../utils/theme";
@@ -31,7 +31,7 @@ const Slider = ({ filter, min, max }: Props) => {
 
   const onChangeHandle = (e, value: number[], k: keyof Player) => {
     setFilterValue(value);
-    dispatch({ type: SLIDER_FILTER, key: k, value });
+    dispatch({ type: SET_FILTER, key: k, value });
   };
 
   return (
