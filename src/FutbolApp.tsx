@@ -47,7 +47,7 @@ const FutbolApp = (props: Props) => {
             alignItems: "center",
           }}
         >
-          <h1 css={styles.headerTitle}>Goleadores</h1>
+          <h1 css={styles.headerTitle}>Goleadores de Dinamarca</h1>
           <SearchBar />
           <BiFilter css={styles.menuButton} onClick={onClickHandle} />
           {showFilters && (
