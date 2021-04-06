@@ -11,5 +11,5 @@ A lightweight implementation of the Sportsmonk API using:
 ## Instructions 
 
 - Clone the repo 
-- Add your api key in api instance in ./utils 
+- Make .env file in the root folder and add REACT_APP_API_KEY = <YOUR API KEY>
 - Run yarn
