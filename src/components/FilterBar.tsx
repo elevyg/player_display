@@ -1,9 +1,11 @@
 /* eslint-disable react/require-default-props */
 /* eslint-disable arrow-body-style */
 /** @jsxImportSource @emotion/react */
-import { useMediaQuery } from "@material-ui/core";
+import { Button, useMediaQuery } from "@material-ui/core";
 import React from "react";
 import { GrClose } from "react-icons/gr";
+import { useApi } from "../context/apiContext";
+import { CLEAR_FILTERS } from "../context/apiTypes";
 
 import { createStyles } from "../types/emotion-styles";
 import { mq } from "../utils/mq";
@@ -19,6 +21,11 @@ interface Props {
 
 const FilterBar = ({ closeFilters }: Props) => {
   const medium = useMediaQuery(mq("md"));
+  const { dispatch } = useApi();
+  const onClearHandle = () => {
+    dispatch({ type: CLEAR_FILTERS });
+  };
+
   return (
     <div css={styles.container}>
       <div css={styles.headerContainer}>
@@ -36,6 +43,9 @@ const FilterBar = ({ closeFilters }: Props) => {
       <Select filter="nationality" />
       <h2>Equipo</h2>
       <Select filter="teamName" />
+      <Button onClick={onClearHandle} style={styles.clearButton}>
+        Limpiar Filtros
+      </Button>
     </div>
   );
 };
@@ -73,4 +83,5 @@ const styles = createStyles({
       paddingTop: spacing.xxlarge,
     },
   },
+  clearButton: { marginTop: spacing.large },
 });

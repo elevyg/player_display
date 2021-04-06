@@ -2,6 +2,7 @@ import { sliderFilter } from "../utils/sliderFilter";
 import {
   Action,
   CLEAR_FILTERS,
+  CLEAR_SEARCH,
   SET_FILTER,
   SET_LOADING,
   SET_SEARCH_TEXT,
@@ -97,6 +98,8 @@ const apiReducer = (state: State, action: Action): State => {
         nationalityFilter: null,
         teamNameFilter: null,
       };
+    case CLEAR_SEARCH:
+      return { ...state, searchText: null };
     default: {
       return state;
     }

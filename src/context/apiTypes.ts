@@ -7,6 +7,7 @@ export const SET_SEASONS = "SET_SEASONS";
 export const SET_SEASON = "SET_SEASON";
 export const SET_FILTER = "SET_FILTER";
 export const CLEAR_FILTERS = "CLEAR_FILTERS";
+export const CLEAR_SEARCH = "CLEAR_SEARCH";
 export const SET_LOADING = "SET_LOADING";
 export const SET_SEARCH_TEXT = "SET_SEARCH_TEXT";
 
@@ -56,6 +57,9 @@ interface UpdateDisplayedPlayers {
 interface ClearFilters {
   type: typeof CLEAR_FILTERS;
 }
+interface ClearSearch {
+  type: typeof CLEAR_SEARCH;
+}
 
 interface SetSearchText {
   type: typeof SET_SEARCH_TEXT;
@@ -70,4 +74,5 @@ export type Action =
   | SetLoading
   | UpdateDisplayedPlayers
   | SetSearchText
-  | ClearFilters;
+  | ClearFilters
+  | ClearSearch;

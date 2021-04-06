@@ -5,12 +5,13 @@ import { SET_FILTER, UPDATE_DISPLAYED_PLAYERS } from "../context/apiTypes";
 import { useApi } from "../context/apiContext";
 import { Player } from "../types/Player";
 import { theme } from "../utils/theme";
+import { spacing } from "../utils/units";
 
 const CustomSlider = withStyles({
   root: {
     color: theme.color.red,
     height: 3,
-    padding: "13px 0",
+    paddingTop: spacing.large,
   },
 })(MUISlider);
 

@@ -6,7 +6,6 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import FilterBar from "./components/FilterBar";
 
-import PlayerCard from "./components/PlayerCard";
 import { getSeasons, getTopScorers } from "./context/apiActions";
 import { useApi } from "./context/apiContext";
 import { createStyles } from "./types/emotion-styles";
@@ -14,6 +13,7 @@ import { mq } from "./utils/mq";
 import { theme } from "./utils/theme";
 import { spacing } from "./utils/units";
 import SearchBar from "./components/SearchBar";
+import Body from "./components/Body";
 
 interface Props {}
 
@@ -40,29 +40,18 @@ const FutbolApp = (props: Props) => {
   return (
     <div css={styles.container}>
       {medium && <FilterBar />}
-      <div css={styles.headerContainer}>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-          }}
-        >
-          <h1 css={styles.headerTitle}>Goleadores de Dinamarca</h1>
-          <SearchBar />
+      <div css={styles.bodyContainer}>
+        <div css={styles.titleContainer}>
+          <div css={styles.headerContainer}>
+            <h1 css={styles.headerTitle}>Goleadores de Dinamarca</h1>
+            <SearchBar />
+          </div>
           <BiFilter css={styles.menuButton} onClick={onClickHandle} />
           {showFilters && (
             <FilterBar closeFilters={() => setShowFilters(false)} />
           )}
         </div>
-        <div css={styles.cardsContainer}>
-          {state.loading || state.displayedPlayers.length === 0 ? (
-            <h1>Cargando ...</h1>
-          ) : (
-            state.displayedPlayers.map((p: string) => (
-              <PlayerCard id={p} key={p} />
-            ))
-          )}
-        </div>
+        <Body />
       </div>
     </div>
   );
@@ -71,37 +60,13 @@ const FutbolApp = (props: Props) => {
 export default FutbolApp;
 
 const styles = createStyles({
-  cardsContainer: {
-    gridTemplateColumns: "auto",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    [mq("md")]: {
-      display: "grid",
-      gridTemplateColumns: "auto auto ",
-      gridRowGap: spacing.small,
-      marginLeft: spacing.medium,
-      paddingTop: spacing.medium,
-      justifyContent: "normal",
-      overflow: "auto",
-    },
-    [mq("xl")]: {
-      display: "grid",
-      gridTemplateColumns: "auto auto auto auto",
-      gridRowGap: spacing.medium,
-      marginLeft: spacing.medium,
-      paddingTop: spacing.medium,
-      justifyContent: "normal",
-    },
-  },
   container: {
     display: "flex",
     flex: 1,
     justifyContent: "flex-start",
     minHeight: "100vh",
   },
-  headerContainer: {
+  bodyContainer: {
     display: "flex",
     flexDirection: "column",
     alignContent: "space-between",
@@ -109,11 +74,37 @@ const styles = createStyles({
     [mq("xs")]: { flexGrow: 2 },
     [mq("md")]: { alignItems: "normal" },
   },
-  headerTitle: { marginLeft: spacing.medium, marginRight: spacing.medium },
+  titleContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "flex-start",
+    [mq("md")]: {
+      justifyContent: "flex-start",
+      alignItems: "flex-start",
+    },
+  },
+  headerContainer: {
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "column",
+    justifyContent: "center",
+    marginBottom: spacing.medium,
+    [mq("md")]: {
+      flexDirection: "row",
+      justifyContent: "flex-start",
+      marginBottom: 0,
+    },
+  },
+  headerTitle: {
+    marginLeft: spacing.medium,
+    marginRight: spacing.medium,
+    textAlign: "center",
+  },
   menuButton: {
     [mq("md")]: { display: "none" },
-    fontSize: 40,
-    marginRight: spacing.medium,
+    fontSize: 60,
+    marginRight: spacing.large,
+    marginTop: spacing.medium,
     color: theme.color.red,
   },
 });
