@@ -1,5 +1,6 @@
 {
   "name": "player_display",
+  "homepage": "http://elevy.github.io/player_display",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -16,6 +17,7 @@
     "axios": "^0.21.1",
     "country-emoji": "^1.5.6",
     "eslint-plugin-prettier": "^3.3.1",
+    "gh-pages": "^3.1.0",
     "material-ui-search-bar": "^1.0.0",
     "polished": "^4.1.1",
     "react": "^17.0.2",
@@ -32,7 +34,9 @@
     "eject": "react-scripts eject",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx src --color",
     "format": "prettier --write 'src/**/*.{ts,tsx,scss,css,json}'",
-    "isready": "yarn run format && yarn run lint && yarn run build"
+    "isready": "yarn run format && yarn run lint && yarn run build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [

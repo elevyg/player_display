@@ -1,5 +1,7 @@
 # Danish League Top Scorers Dashboard
 
+## App deployed in [Here!](https://elevyg.github.io/player_display/)
+
 A lightweight implementation of the Sportsmonk API using: 
 
 - React
